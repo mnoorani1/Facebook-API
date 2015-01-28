@@ -43,6 +43,7 @@ public class Fb {
         //con.makeComment();
         //con.makeCommentOnProfile();
         con.getExpiry();
+        con.getTopPost();
         //con.getCode();
     }
 }

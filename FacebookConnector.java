@@ -5,6 +5,7 @@
  */
 package fb;
 
+import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.DefaultWebRequestor;
 import com.restfb.FacebookClient;
@@ -27,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -242,5 +244,17 @@ return "ok";
         FacebookType publishMessageResponse = fbClient.publish(post.getId()+"/comments", FacebookType.class, Parameter.with("message", "COMMENTING with RestFB"));
         out.println("Published message ID: " + publishMessageResponse.getId());
         //fbClient.publish(post.getId()+"/comments", String.class, Parameter.with("message", "Test comment posted using RestFB API"));
+    }
+    
+    public void getTopPost()
+    {
+        Connection<Post> pageFeed = fbClient.fetchConnection("627981437/feed", Post.class);
+        
+        for (List<Post> feed : pageFeed){
+                        for (Post post : feed){     
+                             //PRINTING THE POST 
+                             out.println(post.getId());
+                        }
+                   }
     }
 }
