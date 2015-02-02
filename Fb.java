@@ -42,8 +42,13 @@ public class Fb {
         //con.makeTextPost();
         //con.makeComment();
         //con.makeCommentOnProfile();
-        con.getExpiry();
-        con.getTopPost();
+        //con.getExpiry();
+        //con.getTopPost();
         //con.getCode();
+        //con.getLikesCount();
+        //con.getCommentCount();
+        //con.getSharesCount();
+        //con.getLikesOnPage();
+        con.getTotalPosts();
     }
 }

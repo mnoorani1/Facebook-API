@@ -248,13 +248,54 @@ return "ok";
     
     public void getTopPost()
     {
-        Connection<Post> pageFeed = fbClient.fetchConnection("627981437/feed", Post.class);
+        Connection<Post> pageFeed = fbClient.fetchConnection("627981437/statuses", Post.class);
+
+        for (List<Post> feed : pageFeed) {
+            for (Post post : feed) {
+                //PRINTING THE POST 
+                out.println(post.getId());
+            }
+        }
+    }
+    
+    public void getLikesCount()
+    {
+        Post post = fbClient.fetchObject("74133697733_10152696935927734", Post.class, Parameter.with("fields", "from,message,to,likes.summary(true),comments.summary(true)"));
+        out.println("Post by: " + post.getFrom().getName());
+        out.println("Post text: " + post.getMessage());
+        out.println("Likes count: " + post.getLikesCount());
+    }
+    
+    public void getSharesCount()
+    {
+        Post post = fbClient.fetchObject("74133697733_10152696935927734", Post.class);
+        out.println("Shares count: " + post.getSharesCount());
+    }
+    
+    public void getCommentCount()
+    {
+        Post post = fbClient.fetchObject("74133697733_10152696935927734", Post.class, Parameter.with("fields", "from,to,likes.summary(true),comments.summary(true)"));
+        out.println("Comments count: " + post.getCommentsCount());
+    }
+    
+    public void getLikesOnPage()
+    {
+        Page pagee = fbClient.fetchObject("74133697733", Page.class);
+        out.println("Page name: " + pagee.getName());
+        out.println("Page likes count: " + pagee.getLikes());
+    }
+    
+    public void getTotalPosts()
+    {
+        Connection<Post> pageFeed = fbClient.fetchConnection("74133697733/statuses", Post.class);
+        int count=0;
         
-        for (List<Post> feed : pageFeed){
-                        for (Post post : feed){     
-                             //PRINTING THE POST 
-                             out.println(post.getId());
-                        }
-                   }
+        for (List<Post> feed : pageFeed) {
+            for (Post post : feed) {
+                //PRINTING THE POST 
+                count++;
+            }
+        }
+        out.println("Total posts: " + count);
     }
 }
